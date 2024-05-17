@@ -1,0 +1,36 @@
+<h2>Welcome to Tech Blog</h2>
+{{#if logged_in}}
+  <p>Welcome back, {{username}}!</p>
+  {{!-- {{else}} --}}
+{{/if}}
+<h4>Latest Blog Posts</h4>
+{{#each blogs as |blog|}}
+  <div class='card d-flex border border-dark border-2'>
+    <div
+      class='card-header d-flex justify-content-between align-items-center bg-dark text-light'
+    >
+      <h5 class='card-title mb-0'>{{blog.title}}</h5>
+      <p class='mb-0 ml-3'>
+        Published by
+        {{blog.user.username}}
+        on
+        {{format_date blog.createdAt}}
+      </p>
+    </div>
+    <div class='card-body bg-secondary'>
+      <p class='card-text'>{{blog.content}}</p>
+      <div class='d-flex justify-content-end'>
+        <a
+          class='btn btn-dark text-light mx-2'
+          href='/blogs/{{blog.id}}'
+          id='comment'
+        >
+          Comments
+        </a>
+      </div>
+    </div>
+  </div>
+  <br />
+{{else}}
+  <p>No blog posts found.</p>
+{{/each}}
